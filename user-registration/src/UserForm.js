@@ -2,14 +2,14 @@ import React from 'react'
 import { useHistory } from 'react-router';
 import { useForm } from 'react-hook-form';
 
-export const UserForm = ({ user }) => {
+export const UserForm = ({ user, onSubmit }) => {
     const { register, handleSubmit } = useForm({
         defaultValues: { Lname: user ? user.Lname :""  },
     });
     const history = useHistory()
 
-      const onSubmit = handleSubmit((data) => {
-        alert(JSON.stringify(data))
+      const SubmitHandler = handleSubmit((data) => {
+        onSubmit(data)
         history.push('/')
       });
 
@@ -18,7 +18,7 @@ export const UserForm = ({ user }) => {
         <div className="mt-3 p-3">
 
             <h3>PERSONAL INFORMATION</h3>
-            <form onSubmit={onSubmit}>
+            <form onSubmit={SubmitHandler}>
                 <h5>Full Name:</h5>
                 <div className="row g-3 align-items-center">
                     <div className="col">
