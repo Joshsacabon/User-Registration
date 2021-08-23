@@ -29,7 +29,7 @@ export const UserList = () => {
                         items.map( user => (
                             <tr key={user._id}>
                                  <td>
-                                     {user.Lname}
+                                     {user.Lname}, {user.Fname} {user.Mname}
                                  </td>
                                  <td>
                                      <Link to={`/edit/${user._id}`}> Edit </Link>

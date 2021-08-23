@@ -3,7 +3,22 @@ import { useForm } from 'react-hook-form';
 
 export const UserForm = ({ user, onSubmit }) => {
     const { register, handleSubmit } = useForm({
-        defaultValues: { Lname: user ? user.Lname :""  },
+        defaultValues: { 
+            Fname: user ? user.Fname :"",
+            Mname: user ? user.Mname :"",
+            Lname: user ? user.Lname :"",
+            Birthday: user ? user.Birthday :"",
+            Age: user ? user.Age :"",
+            EmailAdd: user ? user.EmailAdd :"",
+            CellNumber: user ? user.CellNumber :"",
+            Gender: user ? user.Gender :"",
+            SAddress: user ? user.SAddress :"",
+            City: user ? user.City :"",
+            Province: user ? user.Province :"",
+            zipcode: user ? user.zipcode :"",
+            country: user ? user.country :"",
+
+        },
     });
 
       const SubmitHandler = handleSubmit((data) => {
@@ -73,7 +88,7 @@ export const UserForm = ({ user, onSubmit }) => {
                     </div>
                     <div className="col-4">
                         <input className="form-control " {...register("Province",)} type="text" id="Province"/>
-                        <label class="text-secondary" htmlFor="Lname">Province</label>
+                        <label class="text-secondary" htmlFor="Province">Province</label>
                     </div>
                     <div className="col-4">
                         <input className="form-control " {...register("zipcode",)} type="text" id="zipcode"/>

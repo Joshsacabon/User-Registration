@@ -51,7 +51,20 @@ app.get("/", (req, res) => {
       if (!user) {
         res.status(404).send("User not found");
       } else {
+        user.Fname = req.body.Fname;
+        user.Mname = req.body.Mname;
         user.Lname = req.body.Lname;
+        user.Birthday = req.body.Birthday;
+        user.Age = req.body.Age;
+        user.EmailAdd = req.body.EmailAdd;
+        user.CellNumber = req.body.CellNumber;
+        user.Gender = req.body.Gender;
+        user.SAddress = req.body.SAddress;
+        user.City = req.body.City;
+        user.Province = req.body.Province;
+        user.zipcode = req.body.zipcode;
+        user.country = req.body.country;
+
   
         user
           .save()
