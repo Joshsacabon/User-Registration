@@ -3,7 +3,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const User = require("./models/User");
 
-mongoose.connect("mongodb://127.0.0.1:27017/todos", { useNewUrlParser: true });
+mongoose.connect("mongodb://127.0.0.1:27017/users", { useNewUrlParser: true });
 
 mongoose.connection.once("open", () => {
   console.log("Mongodb connection established successfully");
@@ -27,7 +27,7 @@ app.get("/", (req, res) => {
   });
   
   app.post("/create", (req, res) => {
-    const user = new Todo(req.body);
+    const user = new User(req.body);
     user
       .save()
       .then((user) => {
@@ -40,18 +40,18 @@ app.get("/", (req, res) => {
   
   app.get("/:id", (req, res) => {
     const id = req.params.id;
-    Todo.findById(id, (err, user) => {
+    User.findById(id, (err, user) => {
       res.json(user);
     });
   });
   
   app.post("/:id", (req, res) => {
     const id = req.params.id;
-    Todo.findById(id, (err, user) => {
+    User.findById(id, (err, user) => {
       if (!user) {
         res.status(404).send("User not found");
       } else {
-        user.text = req.body.text;
+        user.Lname = req.body.Lname;
   
         user
           .save()

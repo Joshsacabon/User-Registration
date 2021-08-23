@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const Todo = mongoose.Schema({
+const User = mongoose.Schema({
   Lname: {
     type: String,
   },

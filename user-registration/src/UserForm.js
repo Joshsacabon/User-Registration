@@ -1,16 +1,13 @@
 import React from 'react'
-import { useHistory } from 'react-router';
 import { useForm } from 'react-hook-form';
 
 export const UserForm = ({ user, onSubmit }) => {
     const { register, handleSubmit } = useForm({
         defaultValues: { Lname: user ? user.Lname :""  },
     });
-    const history = useHistory()
 
       const SubmitHandler = handleSubmit((data) => {
         onSubmit(data)
-        history.push('/')
       });
 
     return(

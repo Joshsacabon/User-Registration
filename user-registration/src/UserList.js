@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'; 
+import { getUsers} from './api'
 
 export const UserList = () => {
     const [items, setItems] = useState([]);
 
     useEffect(() => {
-        setItems ([
-            {Lname: "foo", id: 0},
-            {Lname: "bar", id: 1},
-            {Lname: "barz", id: 2},
-        ])
+        const fetchItems = async () => {
+            const users = await getUsers()
+            setItems(users)
+        }
+        fetchItems()
     },[ ])
 
     return (
@@ -26,12 +27,12 @@ export const UserList = () => {
                 <tbody>
                     {
                         items.map( user => (
-                            <tr key={user.id }>
+                            <tr key={user._id}>
                                  <td>
                                      {user.Lname}
                                  </td>
                                  <td>
-                                     <Link to={`/edit/${user.id}`}> Edit </Link>
+                                     <Link to={`/edit/${user._id}`}> Edit </Link>
                                  </td>
                             </tr>
                         ))
