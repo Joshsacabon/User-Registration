@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useRouteMatch } from 'react-router-dom';
+import { Link, useRouteMatch } from 'react-router-dom';
 import { getUser, } from './api';
 
 
@@ -88,6 +88,13 @@ export const ViewUser = () => {
                         <label class="text-secondary" htmlFor="country">Country</label>
                     </div>
                 </div>
+                <br/>
+                <div className="form-group">
+                    <Link  to={`/edit/${user._id}`} className="btn btn-primary ">
+                        Edit
+                    </Link>
+                </div>
+            <br/>
             </div>
         </div>
     ): (<div> Loading ....</div>)
