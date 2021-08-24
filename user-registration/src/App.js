@@ -3,6 +3,7 @@ import { Route, Switch, Link } from 'react-router-dom'
 import { UserList } from './UserList'
 import { CreateUser } from './CreateUser'
 import { EditUser } from './EditUser'
+import { ViewUser } from './ViewUser'
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
     <Switch>
       <Route exact path="/" component={UserList}/>
       <Route path="/edit/:id" component={EditUser}/>
+      <Route path="/view/:id" component={ViewUser}/>
       <Route path="/create" component={CreateUser}/>
     </Switch>
     </div>

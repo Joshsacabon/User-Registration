@@ -22,6 +22,7 @@ export const UserList = () => {
                     <tr>
                         <th>Name</th>
                         <th>Action</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -33,6 +34,9 @@ export const UserList = () => {
                                  </td>
                                  <td>
                                      <Link to={`/edit/${user._id}`}> Edit </Link>
+                                 </td>
+                                 <td>
+                                     <Link to={`/view/${user._id}`}> View </Link>
                                  </td>
                             </tr>
                         ))

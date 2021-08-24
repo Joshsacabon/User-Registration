@@ -1,48 +1,37 @@
-import React from 'react'
-import { useForm } from 'react-hook-form';
+import React, { useState, useEffect } from 'react'
+import { useRouteMatch } from 'react-router-dom';
+import { getUser, } from './api';
 
-export const UserForm = ({ user, onSubmit}) => {
-    const { register, handleSubmit } = useForm({
-        defaultValues: { 
-            Fname: user ? user.Fname :"",
-            Mname: user ? user.Mname :"",
-            Lname: user ? user.Lname :"",
-            Birthday: user ? user.Birthday :"",
-            Age: user ? user.Age :"",
-            EmailAdd: user ? user.EmailAdd :"",
-            CellNumber: user ? user.CellNumber :"",
-            Gender: user ? user.Gender :"",
-            SAddress: user ? user.SAddress :"",
-            City: user ? user.City :"",
-            Province: user ? user.Province :"",
-            zipcode: user ? user.zipcode :"",
-            country: user ? user.country :"",
 
-        },
-    });
+export const ViewUser = () => {
+    const match = useRouteMatch()
+    const [user, setUser] = useState();
 
-      const SubmitHandler = handleSubmit((data) => {
-        onSubmit(data)
-      });
+    useEffect(() => { 
+        const fetchUser = async () =>{
+            const user = await getUser(match.params.id)
+            setUser(user)
+        }
+        fetchUser()
+    },[match])
 
-    return(
+
+    return user ? (
         <div className="container text-dark bg-info rounded">
         <div className="mt-3 p-3">
-
             <h3>PERSONAL INFORMATION</h3>
-            <form onSubmit={SubmitHandler} >
-                <h5>Full Name:</h5>
+            <h5>Full Name:</h5>
                 <div className="row g-3 align-items-center">
                     <div className="col">
-                        <input className="form-control " {...register("Fname",)} type="text" id="Fname" />
+                        <input className="form-control " value={user.Fname} type="text" id="Fname" readOnly/>
                         <label class="text-secondary"  htmlFor="Fname">First Name</label>
                     </div>
                     <div className="col">
-                        <input className="form-control " {...register("Mname",)} type="text" id="Mname" />
+                        <input className="form-control " value={user.Mname} type="text" id="Mname" readOnly/>
                         <label class="text-secondary" htmlFor="Mname">Middle Name</label>
                     </div>
                     <div className="col">
-                        <input className="form-control " {...register("Lname",)} type="text" id="Lname"/>
+                        <input className="form-control " value={user.Lname} type="text" id="Lname"readOnly/>
                         <label class="text-secondary" htmlFor="Lname">Last Name</label>
                     </div>
                 </div>
@@ -50,26 +39,26 @@ export const UserForm = ({ user, onSubmit}) => {
                 <div className="row g-3 align-items-center">
                     <div className="col">
                         <label htmlFor="Birthday"><h5>Birthday:</h5></label>
-                        <input className="form-control " {...register("Birthday",)} type="date" id="Birthday"/>
+                        <input className="form-control " value={user.Birthday} type="date" id="Birthday"readOnly/>
                     </div>
                     <div className="col-auto">
                         <label htmlFor="Age"><h5>Age:</h5></label>
-                        <input className="form-control " {...register("Age",)} type="text" id="Age"/>
+                        <input className="form-control " value={user.Age} type="text" id="Age"readOnly/>
                     </div>
                 </div>
                 <br/>
                 <div className="row g-3 align-items-center">
                     <div className="col">
                         <label htmlFor="EmailAdd"><h5>Email Address:</h5></label>
-                        <input className="form-control " {...register("EmailAdd",)} type="text" id="EmailAdd"/>
+                        <input className="form-control " value={user.EmailAdd} type="text" id="EmailAdd"readOnly/>
                     </div>
                     <div className="col">
                         <label htmlFor="CellNumber"><h5>Phone Number:</h5></label>
-                        <input className="form-control " {...register("CellNumber",)} type="text" id="CellNumber"/>
+                        <input className="form-control " value={user.CellNumber} type="text" id="CellNumber" readOnly/>
                     </div>
                     <div className="col-auto">
                         <label htmlFor="Gender"><h5>Gender:</h5></label>
-                        <select class="form-select" id="Gender" {...register("Gender",)}>
+                        <select class="form-select" id="Gender" value={user.Gender} disabled >
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
                         </select>
@@ -79,36 +68,27 @@ export const UserForm = ({ user, onSubmit}) => {
                 <h5>Address:</h5>
                 <div className="row g-3 align-items-center">
                     <div className="col-12">
-                        <input className="form-control " {...register("SAddress",)} type="text" id="SAddress"/>
+                        <input className="form-control " value={user.SAddress} type="text" id="SAddress"readOnly/>
                         <label class="text-secondary"  htmlFor="SAddress">Street Address</label>
                     </div>
                     <div className="col-4">
-                        <input className="form-control " {...register("City",)} type="text" id="City"/>
+                        <input className="form-control " value={user.City} type="text" id="City"readOnly/>
                         <label class="text-secondary" htmlFor="City">City</label>
                     </div>
                     <div className="col-4">
-                        <input className="form-control " {...register("Province",)} type="text" id="Province"/>
+                        <input className="form-control " value={user.Province} type="text" id="Province"readOnly/>
                         <label class="text-secondary" htmlFor="Province">Province</label>
                     </div>
                     <div className="col-4">
-                        <input className="form-control " {...register("zipcode",)} type="text" id="zipcode"/>
+                        <input className="form-control " value={user.zipcode} type="text" id="zipcode"readOnly/>
                         <label class="text-secondary" htmlFor="zipcode">Zip Code</label>
                     </div>
                     <div className="col-12">
-                        <input className="form-control " {...register("country",)} type="text" id="country"/>
+                        <input className="form-control " value={user.country} type="text" id="country"readOnly/>
                         <label class="text-secondary" htmlFor="country">Country</label>
                     </div>
                 </div>
-                <br/>
-                <div className="form-group">
-                    <button  type="submit" className="btn btn-primary ">
-                        Submit
-                    </button>
-                </div>
-            <br/>
-            </form>
+            </div>
         </div>
-    </div>
-        
-    )
+    ): (<div> Loading ....</div>)
 }
