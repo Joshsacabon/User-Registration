@@ -6,12 +6,27 @@ export const UserList = () => {
     const [items, setItems] = useState([]);
 
     useEffect(() => {
+        getuserList()
+    },[ ])
+    
+    function getuserList(){
         const fetchItems = async () => {
             const users = await getUsers()
             setItems(users)
         }
-        fetchItems()
-    },[ ])
+        fetchItems();
+    }
+
+
+    const Deleteuser = (id) =>{
+        fetch(`http://localhost:4000/${id}` , {
+          method:'DELETE'
+        }).then((result) => result.json()).then((resp)=>{
+          alert("User Deleted")
+          console.warn(resp)
+          getuserList();
+        })
+      };
 
     return (
         <div className="container">
@@ -37,6 +52,9 @@ export const UserList = () => {
                                  </td>
                                  <td>
                                      <Link to={`/view/${user._id}`}> View </Link>
+                                 </td>
+                                 <td>
+                                     <button onClick={() => Deleteuser(user._id)}> Delete</button   >
                                  </td>
                             </tr>
                         ))

@@ -3,6 +3,8 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const User = require("./models/User");
 
+const { response } = require("express");
+
 mongoose.connect("mongodb://127.0.0.1:27017/users", { useNewUrlParser: true });
 
 mongoose.connection.once("open", () => {
@@ -75,6 +77,18 @@ app.get("/", (req, res) => {
       }
     });
   });
+
+  app.delete('/:id', async (req, res) => {
+    let id = req.params.id;
+    let user;
+    try {
+      user = await User.findByIdAndDelete(id);
+    } catch (err) {
+      throw err;
+    }
+    if (user) return res.json({ deleted: true });
+    return res.json({ deleted: false });
+});
 
 app.listen(PORT, () => {
   console.log("Server is running on port " + PORT);
