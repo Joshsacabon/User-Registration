@@ -22,7 +22,6 @@ export const UserList = () => {
         fetch(`http://localhost:4000/${id}` , {
           method:'DELETE'
         }).then((result) => result.json()).then((resp)=>{
-          alert("User Deleted")
           console.warn(resp)
           getuserList();
         })
@@ -38,6 +37,7 @@ export const UserList = () => {
                         <th>Name</th>
                         <th>Action</th>
                         <th></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -48,13 +48,13 @@ export const UserList = () => {
                                      {user.Lname}, {user.Fname} {user.Mname}
                                  </td>
                                  <td>
-                                     <Link to={`/edit/${user._id}`}> Edit </Link>
+                                    <button type="button" class="btn btn-primary"> <Link to={`/edit/${user._id}`} style={{ color:'#FFF', textDecoration:'none' }} > Edit </Link> </button>
                                  </td>
                                  <td>
-                                     <Link to={`/view/${user._id}`}> View </Link>
+                                    <button type="button" class="btn btn-primary"> <Link to={`/view/${user._id}`} style={{ color:'#FFF', textDecoration:'none'}} > View </Link> </button>
                                  </td>
                                  <td>
-                                     <button onClick={() => Deleteuser(user._id)}> Delete</button   >
+                                     <button type="button" class="btn btn-primary" onClick={() => Deleteuser(user._id)}> Delete</button   >
                                  </td>
                             </tr>
                         ))
